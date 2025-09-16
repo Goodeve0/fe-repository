@@ -3,7 +3,7 @@ function myNew(fn, ...args) {
     return 'Error in params';
   }
   const obj = {};
-  obj._proto_ = Object.create(fn.prototype);
+  obj.__proto__ = Object.create(fn.prototype);
   let ret = fn.call(obj, ...args);
-  return ret instanceof obj ? ret : obj;
+  return ret instanceof Object ? ret : obj;
 }
