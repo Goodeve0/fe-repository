@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>返回拦截示例</title>
+  <style>
+    #dialog {
+      display: none;
+      position: fixed; top: 30%; left: 50%;
+      transform: translateX(-50%);
+      background: white; padding: 20px;
+      border: 1px solid #ccc; border-radius: 8px;
+    }
+    #mask {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,.4);
+    }
+  </style>
+</head>
+<body>
+  <h1>首页</h1>
+  <p>点击浏览器返回按钮试试 👇</p>
+
+  <div id="mask"></div>
+  <div id="dialog">
+    <p>🎁 送你一张优惠券，再逛逛吧！</p>
+    <button onclick="hideDialog()">好的</button>
+    <button onclick="realBack()">坚持退出</button>
+  </div>
+
+  <script>
+    let firstBack = false;
+
+    function showDialog() {
+      document.getElementById("mask").style.display = "block";
+      document.getElementById("dialog").style.display = "block";
+    }
+
+    function hideDialog() {
+      document.getElementById("mask").style.display = "none";
+      document.getElementById("dialog").style.display = "none";
+      firstBack = false; // 重置
+      history.pushState(null, null, document.URL); // 再推一层
+    }
+
+    function realBack() {
+      history.back(); // 真退出
+    }
+
+    window.addEventListener("popstate", function () {
+      if (!firstBack) {
+        showDialog();
+        firstBack = true;
+        history.pushState(null, null, document.URL); // 阻止直接退出
+      } else {
+        realBack();
+      }
+    });
+
+    // 初始化：先塞一个历史记录
+    history.pushState(null, null, document.URL);
+  </script>
+</body>
+</html>
