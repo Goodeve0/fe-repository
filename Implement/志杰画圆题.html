@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>画一个圆，直径固定页面宽度1/10 永远在页面正中间</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .circle {
+            width: 10vw;
+            height: 10vw;
+            background-color: pink;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <!-- 1. 浏览器默认会给body加一个 margin（一般是 8px） -->
+    <!-- 2. 如果不给 body 指定高度，它的高度默认是由内容撑开的，而不是整个屏幕高 -->
+    <div class="circle"></div>
+</body>
+</html>
