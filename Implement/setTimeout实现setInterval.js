@@ -1,4 +1,4 @@
-function customSetTimout(fn, time) {
+function customSetTimeout(fn, time) {
   let intervalID = null;
   function loop() {
     intervalID = setTimeout(() => {
@@ -6,13 +6,4 @@ function customSetTimout(fn, time) {
       loop();
     }, time);
   }
-  loop();
-  return () => clearTimeout(intervalID);
 }
-const interval = customSetTimout(function () {
-  console.log('hello world');
-}, 1000);
-
-setTimeout(() => {
-  interval();
-}, 5000);
